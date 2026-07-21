@@ -1,0 +1,11 @@
+[install]
+linker = "isolated"
+exact = true
+minimumReleaseAge = 259200
+
+[run]
+bun = true
+silent = true
+
+[console]
+depth = 5

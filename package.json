@@ -1,0 +1,44 @@
+{
+  "name": "sistema-para-ambulatorio",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepare": "svelte-kit sync || echo ''",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "lint": "biome check . && prettier --check .",
+    "format": "biome check --write . && prettier --write .",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "sui-mono": "sui-mono"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "0.13.11",
+    "valibot": "1.4.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.4",
+    "@s-ui/mono": "2.46.0",
+    "@sveltejs/kit": "2.69.3",
+    "@sveltejs/vite-plugin-svelte": "7.2.0",
+    "@tailwindcss/vite": "4.3.3",
+    "@types/bun": "1.3.14",
+    "drizzle-kit": "0.31.10",
+    "drizzle-orm": "0.45.2",
+    "prettier": "3.9.5",
+    "prettier-plugin-svelte": "4.1.1",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "svelte": "5.56.6",
+    "svelte-adapter-bun": "1.0.1",
+    "svelte-check": "4.7.3",
+    "tailwindcss": "4.3.3",
+    "typescript": "7.0.2",
+    "ultracite": "7.9.4",
+    "vite": "8.1.5"
+  }
+}
