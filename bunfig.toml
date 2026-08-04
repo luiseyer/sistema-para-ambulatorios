@@ -1,11 +1,15 @@
 [install]
 linker = "isolated"
 exact = true
-minimumReleaseAge = 259200
+minimumReleaseAge = 259200 # 3 días
 
 [run]
 bun = true
 silent = true
 
-[console]
-depth = 5
+[test]
+coverage = true
+coveragePathIgnorePatterns = [
+  "src/lib/db/schema.ts",
+  "src/lib/db/migrations",
+]

@@ -1,5 +1,21 @@
-*.*
+# Lenguajes 100% soportados por Biome
+**/*.js
+**/*.jsx
+**/*.ts
+**/*.tsx
+**/*.mjs
+**/*.cjs
+**/*.mts
+**/*.cts
+**/*.json
+**/*.jsonc
+**/*.css
+**/*.scss
+**/*.less
+**/*.html
+**/*.graphql
+**/*.gql
+
+# Archivos generados por la compilación
 dist/
 build/
-!*.md
-!*.svelte
