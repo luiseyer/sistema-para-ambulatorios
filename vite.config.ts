@@ -17,6 +17,11 @@ export default defineConfig({
 
       adapter: adapter(),
 
+      alias: {
+        $lib: "./src/lib",
+        $test: "./src/test",
+      },
+
       typescript: {
         config: (config) => {
           config.include.push("../drizzle.config.ts")
