@@ -1,6 +1,6 @@
-# App Ambulatorio
+# Sistema para Ambulatorios
 
-Aplicación web para la gestión de historias clínicas familiares en ambulatorios y centros de salud. Diseñada para funcionar sin conexión a internet (offline-first) y sincronizar automáticamente cuando hay red disponible.
+Aplicación Web Progresiva (PWA) para la gestión de historias clínicas familiares en ambulatorios y centros de salud. Diseñada para funcionar sin conexión a internet (offline-first) y sincronizar automáticamente cuando hay red disponible.
 
 ## ¿Para qué sirve?
 
