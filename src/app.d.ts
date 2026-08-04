@@ -1,14 +1,20 @@
+// biome-ignore-all lint/style/noNamespace: App namespace is used by SvelteKit
+// biome-ignore-all lint/style/useConsistentTypeDefinitions: interface is used by SvelteKit
+
+import type { Result } from "better-result"
+import type { Database } from "$lib/db/connection.server"
+import type { DatabaseError } from "$lib/features/sync/errors"
+
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
-  // biome-ignore lint/style/noNamespace: App namespace is used by SvelteKit
   namespace App {
     // interface Error {}
-    // interface Locals {}
+    interface Locals {
+      db: Result<Database, DatabaseError>
+    }
     // interface PageData {}
     // interface PageState {}
     // interface Platform {}
   }
 }
-
-export {}
