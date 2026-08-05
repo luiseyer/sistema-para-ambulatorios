@@ -19,6 +19,7 @@ export default defineConfig({
 
       alias: {
         $lib: "./src/lib",
+        $routes: "./src/routes",
         $test: "./src/test",
       },
 

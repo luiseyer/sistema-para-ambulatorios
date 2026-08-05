@@ -8,6 +8,7 @@ import {
   ParseError,
   ValidationError,
 } from "$lib/features/sync/errors"
+import { broadcastPoke } from "$lib/features/sync/poke.server"
 import { push } from "$lib/features/sync/push.server"
 import { type Mutation, PushRequest } from "$lib/features/sync/validators"
 
@@ -69,6 +70,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     const validated = yield* validateRequest(body)
     const mutations = yield* checkSize(validated)
     const result = yield* executePush(db, mutations)
+    broadcastPoke()
     return Result.ok(result)
   })
 
