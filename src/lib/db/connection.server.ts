@@ -4,7 +4,7 @@ import { migrate } from "drizzle-orm/bun-sqlite/migrator"
 
 export const DATABASE_PATH =
   process.env.NODE_ENV === "production"
-    ? (process.env.DATABASE_PATH ?? "ambulatorio.db")
+    ? "ambulatorio.db"
     : "dev-ambulatorio.db"
 
 export type Database = ReturnType<typeof drizzle>
