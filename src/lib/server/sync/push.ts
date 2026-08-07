@@ -1,10 +1,10 @@
 import { Result } from "better-result"
 import { and, eq, lte } from "drizzle-orm"
-import type { Transaction } from "$lib/db/connection.server"
+import type { Mutation, PushResponse } from "$lib/contracts/sync/mutation"
+import type { Transaction } from "$lib/server/db/connection"
 import { DatabaseError } from "./errors"
-import { SYNC_TABLES } from "./policy"
-import { getGlobalVersion, setGlobalVersion } from "./queries.server"
-import type { Mutation } from "./validators"
+import { getGlobalVersion, setGlobalVersion } from "./queries"
+import { SYNC_TABLES } from "./tables"
 
 function applyMutation(
   tx: Transaction,
@@ -44,7 +44,7 @@ function applyMutation(
 export function push(
   tx: Transaction,
   mutations: Mutation[]
-): Result<{ discarded_mutation_ids: string[] }, DatabaseError> {
+): Result<PushResponse, DatabaseError> {
   return Result.gen(function* () {
     let globalVersion = yield* getGlobalVersion(tx)
     const discardedMutationIds: string[] = []

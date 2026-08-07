@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { broadcastPoke, onPoke } from "../poke.server"
+import { broadcastPoke, onPoke } from "$lib/server/sync"
 
 // ponytail: el bus es global de módulo — cada test desuscribe en finally
 // para no filtrar suscripciones entre tests del mismo archivo.

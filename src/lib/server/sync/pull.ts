@@ -1,16 +1,11 @@
 import { Result } from "better-result"
 import { sql } from "drizzle-orm"
-import type { Transaction } from "$lib/db/connection.server"
+import type { PatchEntry, SyncRow } from "$lib/contracts/sync/patch"
+import { SYNC_EXCLUSION_POLICY } from "$lib/contracts/sync/policy"
+import type { Transaction } from "$lib/server/db/connection"
 import { DatabaseError } from "./errors"
-import { SYNC_EXCLUSION_POLICY, SYNC_TABLES } from "./policy"
-import { getGlobalVersion } from "./queries.server"
-
-type SyncRow = Record<string, unknown>
-
-type PatchEntry =
-  | { op: "put"; key: string; data: SyncRow }
-  | { op: "del"; key: string }
-  | { op: "clear" }
+import { getGlobalVersion } from "./queries"
+import { SYNC_TABLES } from "./tables"
 
 function runQueries(
   tx: Transaction,
@@ -53,7 +48,11 @@ function toEntries(name: string, rows: readonly SyncRow[]): PatchEntry[] {
   return rows.map((row) => {
     const { id, ...data } = row
     return row.deleted_at
-      ? { op: "del" as const, key: `${name}/${id}` }
+      ? {
+          op: "del" as const,
+          key: `${name}/${id}`,
+          data: { deleted_at: row.deleted_at as string },
+        }
       : { op: "put" as const, key: `${name}/${id}`, data }
   })
 }

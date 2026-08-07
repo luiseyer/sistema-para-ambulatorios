@@ -1,5 +1,7 @@
 import { describe, expect, test } from "bun:test"
-import { SYNC_EXCLUSION_POLICY, SYNC_TABLES } from "$lib/features/sync/policy"
+import { SYNC_EXCLUSION_POLICY } from "$lib/contracts/sync/policy"
+import { SyncTableName } from "$lib/contracts/sync/tables"
+import { SYNC_TABLES } from "$lib/server/sync/tables"
 
 describe("policy", () => {
   test("las tablas excluidas no están en `SYNC_TABLES`", () => {
@@ -15,5 +17,9 @@ describe("policy", () => {
 
   test("`SYNC_EXCLUSION_POLICY.fields` excluye `password_hash` de `usuario`", () => {
     expect(SYNC_EXCLUSION_POLICY.fields.usuario).toContain("password_hash")
+  })
+
+  test("SyncTableName coincide con las tablas de SYNC_TABLES", () => {
+    expect([...SYNC_TABLES.keys()].sort()).toEqual([...SyncTableName].sort())
   })
 })

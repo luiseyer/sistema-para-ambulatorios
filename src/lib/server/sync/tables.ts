@@ -1,14 +1,13 @@
-import * as schema from "$lib/db/schema"
-import type { TableWithMeta } from "./types"
-
-export const SYNC_EXCLUSION_POLICY = {
-  tables: ["sync_state", "session", "auditoria"],
-  fields: {
-    usuario: ["password_hash"],
-  },
-} as const satisfies SyncPolicy
+import type { AnySQLiteColumn, AnySQLiteTable } from "drizzle-orm/sqlite-core"
+import { SYNC_EXCLUSION_POLICY } from "$lib/contracts/sync/policy"
+import * as schema from "$lib/server/db/schema"
 
 const excludedTables = new Set<string>(SYNC_EXCLUSION_POLICY.tables)
+
+export type TableWithMeta = AnySQLiteTable & {
+  id: AnySQLiteColumn
+  version: AnySQLiteColumn
+}
 
 export const SYNC_TABLES = new Map<string, TableWithMeta>(
   Object.entries(schema)
@@ -21,10 +20,3 @@ export const SYNC_TABLES = new Map<string, TableWithMeta>(
       return [name, table as TableWithMeta]
     })
 )
-
-type SyncPolicy = {
-  tables: readonly (keyof typeof schema)[]
-  fields: {
-    [T in keyof typeof schema]?: readonly (keyof (typeof schema)[T]["$inferInsert"])[]
-  }
-}

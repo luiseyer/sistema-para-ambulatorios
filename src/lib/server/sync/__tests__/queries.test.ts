@@ -1,8 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import {
-  getGlobalVersion,
-  setGlobalVersion,
-} from "$lib/features/sync/queries.server"
+import { getGlobalVersion, setGlobalVersion } from "$lib/server/sync/queries"
 import { expectOk } from "$test/assert"
 import { setupDb } from "$test/db"
 

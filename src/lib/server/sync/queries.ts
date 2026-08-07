@@ -1,7 +1,7 @@
 import { Result } from "better-result"
 import { eq } from "drizzle-orm"
-import type { Transaction } from "$lib/db/connection.server"
-import { sync_state } from "$lib/db/schema"
+import type { Transaction } from "$lib/server/db/connection"
+import { sync_state } from "$lib/server/db/schema"
 import { DatabaseError } from "./errors"
 
 export function getGlobalVersion(

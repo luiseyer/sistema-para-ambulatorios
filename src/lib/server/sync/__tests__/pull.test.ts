@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import * as schema from "$lib/db/schema"
-import { pull } from "$lib/features/sync/pull.server"
+import * as schema from "$lib/server/db/schema"
+import { pull } from "$lib/server/sync"
 import { expectOk } from "$test/assert"
 import { setupDb } from "$test/db"
 import { buildUsuario } from "$test/factories"
@@ -78,7 +78,13 @@ describe("pull", () => {
     })
 
     const { patch } = expectOk(db.transaction((tx) => pull(tx, 5)))
-    expect(patch).toEqual([{ op: "del", key: "patologia/p-1" }])
+    expect(patch).toEqual([
+      {
+        op: "del",
+        key: "patologia/p-1",
+        data: { deleted_at: "2026-07-28T12:00:00.000Z" },
+      },
+    ])
   })
 
   test("`pull` no emite `del` para tombstones con `version <= client_version`", () => {
