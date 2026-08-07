@@ -1,6 +1,6 @@
-import type * as schema from "$lib/db/schema"
-import type { SyncTableName } from "$lib/features/sync/types"
-import type { Mutation } from "$lib/features/sync/validators"
+import type { Mutation } from "$lib/contracts/sync/mutation"
+import type { SyncTableName } from "$lib/contracts/sync/tables"
+import type * as schema from "$lib/server/db/schema"
 
 export function buildSyncState(
   overrides: Partial<typeof schema.sync_state.$inferInsert> = {}

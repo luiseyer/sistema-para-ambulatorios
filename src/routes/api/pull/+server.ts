@@ -1,10 +1,9 @@
 import { error, json, type RequestHandler } from "@sveltejs/kit"
 import { isTaggedError, Result } from "better-result"
 import * as v from "valibot"
-import type { Database } from "$lib/db/connection.server"
-import { DatabaseError, ValidationError } from "$lib/features/sync/errors"
-import { pull } from "$lib/features/sync/pull.server"
-import { PullRequest } from "$lib/features/sync/validators"
+import { PullRequest } from "$lib/contracts/sync/patch"
+import type { Database } from "$lib/server/db/connection"
+import { DatabaseError, pull, ValidationError } from "$lib/server/sync"
 
 function getSearchParams(url: URL): Result<PullRequest, ValidationError> {
   const params = Object.fromEntries(url.searchParams.entries())

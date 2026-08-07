@@ -1,16 +1,16 @@
 import { error, json, type RequestHandler } from "@sveltejs/kit"
 import { isTaggedError, Result } from "better-result"
 import * as v from "valibot"
-import type { Database } from "$lib/db/connection.server"
+import { type Mutation, PushRequest } from "$lib/contracts/sync/mutation"
+import type { Database } from "$lib/server/db/connection"
 import {
   BatchTooLargeError,
+  broadcastPoke,
   DatabaseError,
   ParseError,
+  push,
   ValidationError,
-} from "$lib/features/sync/errors"
-import { broadcastPoke } from "$lib/features/sync/poke.server"
-import { push } from "$lib/features/sync/push.server"
-import { type Mutation, PushRequest } from "$lib/features/sync/validators"
+} from "$lib/server/sync"
 
 const MAX_BATCH_SIZE = 100
 

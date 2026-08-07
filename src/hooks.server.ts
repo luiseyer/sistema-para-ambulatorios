@@ -1,7 +1,7 @@
 import type { Handle } from "@sveltejs/kit"
 import { Result } from "better-result"
-import { createDatabase, DATABASE_PATH } from "$lib/db/connection.server"
-import { DatabaseError } from "$lib/features/sync/errors"
+import { createDatabase, DATABASE_PATH } from "$lib/server/db/connection"
+import { DatabaseError } from "$lib/server/sync"
 
 const db = Result.try({
   try: () => createDatabase(DATABASE_PATH),

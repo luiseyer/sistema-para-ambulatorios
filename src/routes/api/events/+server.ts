@@ -1,4 +1,4 @@
-import { onPoke } from "$lib/features/sync/poke.server"
+import { onPoke } from "$lib/server/sync"
 
 const KEEP_ALIVE_INTERVAL_MS = 15_000
 const KEEP_ALIVE_FRAME = ": keep-alive\n\n"
