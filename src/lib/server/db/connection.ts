@@ -13,6 +13,6 @@ export type Transaction = Parameters<Parameters<Database["transaction"]>[0]>[0]
 export function createDatabase(path = ":memory:"): Database {
   const db = drizzle(path)
   db.run(sql`PRAGMA foreign_keys = ON`)
-  migrate(db, { migrationsFolder: "./src/lib/db/migrations" })
+  migrate(db, { migrationsFolder: "./src/lib/server/db/migrations" })
   return db
 }

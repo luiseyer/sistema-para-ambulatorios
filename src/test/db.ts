@@ -1,5 +1,5 @@
 import { beforeEach } from "bun:test"
-import { createDatabase, type Database } from "$lib/db/connection.server"
+import { createDatabase, type Database } from "$lib/server/db/connection"
 
 export function setupDb() {
   let db: Database

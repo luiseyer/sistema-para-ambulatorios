@@ -1,5 +1,5 @@
-import type { Database } from "$lib/db/connection.server"
-import * as schema from "$lib/db/schema"
+import type { Database } from "$lib/server/db/connection"
+import * as schema from "$lib/server/db/schema"
 import { buildPatologia, buildSyncState } from "$test/factories"
 
 export function seedSyncState(db: Database, version: number) {

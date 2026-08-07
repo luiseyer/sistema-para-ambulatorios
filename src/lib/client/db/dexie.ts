@@ -1,6 +1,7 @@
 import Dexie from "dexie"
-import type * as schema from "$lib/db/schema"
-import type { SyncQueue, SyncTableName } from "$lib/features/sync/types"
+import type { SyncQueue } from "$lib/contracts/sync/mutation"
+import type { SyncStateClient, SyncTableName } from "$lib/contracts/sync/tables"
+import type * as schema from "$lib/server/db/schema"
 
 // biome-ignore lint/suspicious/noUnsafeDeclarationMerging: AppDB interface extends Dexie
 export class AppDB extends Dexie {
@@ -18,6 +19,8 @@ export class AppDB extends Dexie {
       condicion_vida: "id, familia_id, deleted_at",
       vivienda_fauna: "id, vivienda_id, deleted_at",
       catalogo: "id, categoria, deleted_at",
+      archivo_adjunto: "id, deleted_at",
+      sync_state: "key",
       sync_queue: "id, status",
     })
   }
@@ -34,6 +37,8 @@ export interface AppDB extends Dexie {
   condicion_vida: Table<"condicion_vida">
   vivienda_fauna: Table<"vivienda_fauna">
   catalogo: Table<"catalogo">
+  archivo_adjunto: Table<"archivo_adjunto">
+  sync_state: Dexie.Table<SyncStateClient, string>
   sync_queue: Dexie.Table<SyncQueue, string>
 }
 
