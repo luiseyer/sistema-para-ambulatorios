@@ -3,7 +3,7 @@ import { broadcastPoke, onPoke } from "$lib/server/sync"
 
 // ponytail: el bus es global de módulo — cada test desuscribe en finally
 // para no filtrar suscripciones entre tests del mismo archivo.
-describe("poke.server", () => {
+describe("poke", () => {
   test("broadcastPoke invoca los callbacks suscritos", () => {
     let calls = 0
     const off = onPoke(() => {
