@@ -19,6 +19,12 @@ function pullEvent(db: Database, url: URL): RequestEvent {
   return { url, locals: { db: Result.ok(db) } } as unknown as RequestEvent
 }
 
+function eventsEvent(): RequestEvent {
+  return {
+    request: new Request("http://test/api/events"),
+  } as unknown as RequestEvent
+}
+
 function buildOversizedBatch(): string {
   return JSON.stringify({
     mutations: Array.from({ length: 101 }, (_, i) =>
@@ -237,7 +243,7 @@ function streamReader(
 
 describe("GET /api/events", () => {
   test("responde 200 con headers de SSE", async () => {
-    const response = GET_EVENTS()
+    const response = await GET_EVENTS(eventsEvent())
 
     try {
       expect(response.status).toBe(200)
@@ -253,7 +259,7 @@ describe("GET /api/events", () => {
   })
 
   test("emite el frame de poke por el stream tras broadcastPoke", async () => {
-    const response = GET_EVENTS()
+    const response = await GET_EVENTS(eventsEvent())
     const reader = streamReader(response)
 
     try {
@@ -266,7 +272,7 @@ describe("GET /api/events", () => {
   })
 
   test("broadcastPoke no lanza tras cancelar el stream", async () => {
-    const response = GET_EVENTS()
+    const response = await GET_EVENTS(eventsEvent())
     const reader = streamReader(response)
 
     try {

@@ -1,5 +1,5 @@
+import type { RequestHandler } from "@sveltejs/kit"
 import { onPoke } from "$lib/server/sync"
-import type { RequestHandler } from "./$types"
 
 const KEEP_ALIVE_INTERVAL_MS = 15_000
 const KEEP_ALIVE_FRAME = ": keep-alive\n\n"
