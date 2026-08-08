@@ -4,6 +4,7 @@
 import type { Result } from "better-result"
 import type { Database } from "$lib/server/db/connection"
 import type { DatabaseError } from "$lib/server/sync"
+import type { Server } from "bun"
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
@@ -15,6 +16,9 @@ declare global {
     }
     // interface PageData {}
     // interface PageState {}
-    // interface Platform {}
+    interface Platform {
+      server: Server
+      request: Request
+    }
   }
 }

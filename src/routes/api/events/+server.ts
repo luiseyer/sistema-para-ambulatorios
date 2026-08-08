@@ -1,10 +1,16 @@
 import { onPoke } from "$lib/server/sync"
+import type { RequestHandler } from "./$types"
 
 const KEEP_ALIVE_INTERVAL_MS = 15_000
 const KEEP_ALIVE_FRAME = ": keep-alive\n\n"
 const POKE_FRAME = "event: poke\ndata: null\n\n"
 
-export const GET = () => {
+export const GET: RequestHandler = ({ platform }) => {
+  // Bun cierra conexiones idle a los 10s (idleTimeout) y un stream SSE
+  // silencioso cuenta como idle. En producción (svelte-adapter-bun) esto
+  // mataría la conexión entre frames de poke. Desactivar por request:
+  platform?.server?.timeout?.(platform.request, 0)
+
   const encoder = new TextEncoder()
   const cleanup = { clean: () => undefined }
 
