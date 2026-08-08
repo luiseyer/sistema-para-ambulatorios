@@ -1,4 +1,4 @@
-import { error, json, type RequestHandler } from "@sveltejs/kit"
+import { error, type RequestHandler } from "@sveltejs/kit"
 import { isTaggedError, Result } from "better-result"
 import * as v from "valibot"
 import { type Mutation, PushRequest } from "$lib/contracts/sync/mutation"
@@ -75,7 +75,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
   })
 
   return response.match({
-    ok: (data) => json(data, { status: 200 }),
+    ok: (data) => Response.json(data, { status: 200 }),
     err: (cause) =>
       isTaggedError(cause)
         ? cause.toResponse()
