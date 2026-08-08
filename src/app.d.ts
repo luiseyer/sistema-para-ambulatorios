@@ -2,9 +2,9 @@
 // biome-ignore-all lint/style/useConsistentTypeDefinitions: interface is used by SvelteKit
 
 import type { Result } from "better-result"
+import type { Server } from "bun"
 import type { Database } from "$lib/server/db/connection"
 import type { DatabaseError } from "$lib/server/sync"
-import type { Server } from "bun"
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
